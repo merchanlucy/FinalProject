@@ -3,6 +3,7 @@ package org.lucy;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import util.Util;
 
 @ToString
 @EqualsAndHashCode
@@ -14,7 +15,7 @@ public class Department {
 
     public Department(String departmentName) {
         if (isDepartmentNameValid(departmentName)) {
-            this.departmentName = departmentName;
+            this.departmentName = Util.toTitleCase(departmentName);
             this.departmentId = generateNewId();
         } else {
             this.departmentName = null;
@@ -23,7 +24,7 @@ public class Department {
     }
 
     public void setDepartmentName(String departmentName) {
-        this.departmentName = isDepartmentNameValid(departmentName) ? departmentName : null;
+        this.departmentName = isDepartmentNameValid(departmentName) ? Util.toTitleCase(departmentName) : null;
     }
 
     /**
