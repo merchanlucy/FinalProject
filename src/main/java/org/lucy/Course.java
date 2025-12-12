@@ -44,6 +44,10 @@ public class Course {
         return !(sum > 100);
     }
 
+    /**
+     * calculates student average with assignment weight
+     * @return the students average
+     */
     public int[] calcStudentAverage() {
         int[] studentsAvg = new int[registeredStudents.size()];
 
@@ -63,8 +67,15 @@ public class Course {
         return studentsAvg;
     }
 
+    /**
+     * register student to a course
+     * append null to all assignments in course
+     * add a null final score
+     * @param student registered student
+     * @return true if student registers, false if student already registered
+     */
     public boolean registerStudent(Student student) {
-        if (registeredStudents.contains(student)) {
+        if (student == null || registeredStudents.contains(student)) {
             return false;
         }
 
