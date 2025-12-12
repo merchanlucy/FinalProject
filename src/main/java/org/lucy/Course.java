@@ -18,6 +18,7 @@ public class Course {
     private List<Assignment> assignments;
     private List<Student> registeredStudents;
     private static int nextId = 1;
+    private List<Integer> finalScores;
 
     public Course(String courseName, double credits, Department department) {
         this.courseId = String.format("C-%s-%02d", department.getDepartmentId(), nextId++);
@@ -26,6 +27,7 @@ public class Course {
         this.department = department;
         this.assignments = new ArrayList<>();
         this.registeredStudents = new ArrayList<>();
+        this.finalScores = new ArrayList<>();
     }
 
     /**
@@ -40,5 +42,38 @@ public class Course {
         }
 
         return !(sum > 100);
+    }
+
+    public int[] calcStudentAverage() {
+        int[] studentsAvg = new int[registeredStudents.size()];
+
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            double sum = 0;
+
+            for (Assignment assignment : assignments) {
+                Integer score = assignment.getScores().get(i);
+                if (score != null) {
+                    sum += score * assignment.getWeight();
+                }
+            }
+
+            studentsAvg[i] = (int) Math.round(sum / 100);
+        }
+
+        return studentsAvg;
+    }
+
+    public boolean registerStudent(Student student) {
+        if (registeredStudents.contains(student)) {
+            return false;
+        }
+
+        registeredStudents.add(student);
+        for (Assignment assignment : assignments) {
+            assignment.getScores().add(null);
+        }
+
+        finalScores.add(null);
+        return true;
     }
 }
