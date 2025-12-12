@@ -6,6 +6,7 @@ import lombok.Setter;
 import util.Util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode
 @Getter
@@ -24,7 +25,28 @@ public class Student {
         this.gender = gender;
         this.address = address;
         this.department = department;
-        this.registeredCourses = List<Course> courses = new ArrayList<>();
+        this.registeredCourses = new ArrayList<>();
+    }
+
+    /**
+     * add 1 course to student's registeredCourses
+     * adds the student to the course's registeredStudents
+     * appends null for the scores of each assignment
+     * @param course course to be registered
+     * @return true after registering course, false if course is already registered
+     */
+    public boolean registerCourse(Course course) {
+        if (course == null || registeredCourses.contains(course)) {
+            return false;
+        }
+
+        registeredCourses.add(course);
+
+        return true;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = Util.toTitleCase(studentName);
     }
 
     /**
@@ -33,5 +55,9 @@ public class Student {
      */
     private static String generateNewId() {
         return String.format("s%06d", nextId++);
+    }
+
+    public enum Gender {
+        FEMALE, MALE
     }
 }
