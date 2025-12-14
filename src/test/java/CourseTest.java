@@ -1,10 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.lucy.Address;
-import org.lucy.Course;
-import org.lucy.Department;
-import org.lucy.Student;
+import org.lucy.*;
 
 public class CourseTest {
 
@@ -77,5 +74,30 @@ public class CourseTest {
         boolean actual = course.isAssignmentWeightValid();
 
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName("Assign grades to 1 students")
+    void testCalcStudentAverage1() {
+        Address address = new Address(1, "Rue", "Montreal", Address.Province.QC, "X1X2X3");
+        Department department = new Department("Computer Science");
+        Student student1 = new Student("Luciana Merchan", Student.Gender.FEMALE, address, department);
+        Course course = new Course("Intro to Programming", 2.66, department);
+
+        Assignment exam01 = new Assignment("Exam01", 50);
+        Assignment exam02 = new Assignment("Exam02", 50);
+
+        course.getAssignments().add(exam01);
+        course.getAssignments().add(exam02);
+
+        course.registerStudent(student1);
+
+        exam01.getScores().set(0, 100);
+        exam02.getScores().set(0, 80);
+
+        int[] expected = {90};
+        int[] actual = course.calcStudentAverage();
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
