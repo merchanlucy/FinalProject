@@ -155,31 +155,11 @@ public class Course {
 
         System.out.printf("%-20s", "Average");
         for (Assignment assignment : assignments) {
-            int avg = calcAssignmentAverage(assignment);
-            System.out.printf("%15d", avg);
+            double avg = assignment.calcAssignmentAverage();
+            System.out.printf("%15.0f", avg);
         }
 
         System.out.println();
-    }
-
-    /**
-     * helper method for display score
-     * calculates average of assignments and ignore null scores
-     * @param assignment input assignment
-     * @return
-     */
-    private int calcAssignmentAverage(Assignment assignment) {
-        double sum = 0;
-        int count = 0;
-
-        for (Integer score : assignment.getScores()) {
-            if (score != null) {
-                sum += score;
-                count++;
-            }
-        }
-
-        return count == 0 ? 0 : (int) Math.round(sum / count);
     }
 
     /**
