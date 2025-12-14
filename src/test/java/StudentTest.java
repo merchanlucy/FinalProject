@@ -13,7 +13,7 @@ public class StudentTest {
     void testRegisterCourse1() {
         Address address = new Address(1, "Rue", "Montreal", Address.Province.QC, "X1X2X3");
         Department department = new Department("Computer Science");
-        Student student = new Student("Luciana Merchan", Student.Gender.MALE, address, department);
+        Student student = new Student("Luciana Merchan", Student.Gender.FEMALE, address, department);
 
         boolean expected = false;
         boolean actual = student.registerCourse(null);
@@ -25,7 +25,7 @@ public class StudentTest {
     void testRegisterCourse2() {
         Address address = new Address(1, "Rue", "Montreal", Address.Province.QC, "X1X2X3");
         Department department = new Department("Computer Science");
-        Student student = new Student("Luciana Merchan", Student.Gender.MALE, address, department);
+        Student student = new Student("Luciana Merchan", Student.Gender.FEMALE, address, department);
         Course course = new Course("Intro to Programming", 2.66, department);
 
         boolean expected = true;
@@ -38,7 +38,7 @@ public class StudentTest {
     void testDropCourse1() {
         Address address = new Address(1, "Rue", "Montreal", Address.Province.QC, "X1X2X3");
         Department department = new Department("Computer Science");
-        Student student = new Student("Luciana Merchan", Student.Gender.MALE, address, department);
+        Student student = new Student("Luciana Merchan", Student.Gender.FEMALE, address, department);
         Course course = new Course("Intro to Programming", 2.66, department);
 
         student.registerCourse(course);
@@ -53,7 +53,7 @@ public class StudentTest {
     void testDropCourse2() {
         Address address = new Address(1, "Rue", "Montreal", Address.Province.QC, "X1X2X3");
         Department department = new Department("Computer Science");
-        Student student = new Student("Luciana Merchan", Student.Gender.MALE, address, department);
+        Student student = new Student("Luciana Merchan", Student.Gender.FEMALE, address, department);
         Course course = new Course("Intro to Programming", 2.66, department);
 
         boolean expected = false;
