@@ -125,4 +125,60 @@ public class Course {
             finalScores.set(i, finalScore);
         }
     }
+
+    /**
+     * display the scores of a course in a table, with the assignment averages and student weighted average
+     */
+    public void displayScores() {
+        System.out.printf("Course: %s(%s)\n", getCourseName(), getCourseId());
+        int[] finalAvg = calcStudentAverage();
+
+        System.out.printf("%-20s", "");
+        for (Assignment assignment : assignments) {
+            System.out.printf("%15s", assignment.getAssignmentName());
+        }
+
+        System.out.printf("%15s\n", "Final Score");
+        System.out.println();
+
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            Student student = registeredStudents.get(i);
+            System.out.printf("%-20s", student.getStudentName());
+
+            for (Assignment assignment : assignments) {
+                Integer score = assignment.getScores().get(i);
+                System.out.printf("%15s", score);
+            }
+
+            System.out.printf("%15d\n", finalAvg[i]);
+        }
+
+        System.out.printf("%-20s", "Average");
+        for (Assignment assignment : assignments) {
+            int avg = calcAssignmentAverage(assignment);
+            System.out.printf("%15d", avg);
+        }
+
+        System.out.println();
+    }
+
+    /**
+     * helper method for display score
+     * calculates average of assignments and ignore null scores
+     * @param assignment input assignment
+     * @return
+     */
+    private int calcAssignmentAverage(Assignment assignment) {
+        double sum = 0;
+        int count = 0;
+
+        for (Integer score : assignment.getScores()) {
+            if (score != null) {
+                sum += score;
+                count++;
+            }
+        }
+
+        return count == 0 ? 0 : (int) Math.round(sum / count);
+    }
 }
