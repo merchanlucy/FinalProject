@@ -29,13 +29,21 @@ public class Assignment {
     public void generateRandomScore() {
         Random random = new Random();
         int num = random.nextInt(0, 11);
+        int score;
 
         switch (num) {
-            case 1, 2 -> scores.add(random.nextInt(60, 70));
-            case 3, 4 -> scores.add(random.nextInt(70, 80));
-            case 5, 6, 7, 8 -> scores.add(random.nextInt(80, 90));
-            case 9, 10 -> scores.add(random.nextInt(90, 101));
-            default -> scores.add(random.nextInt(0,60));
+            case 1, 2 -> score = random.nextInt(60, 70);
+            case 3, 4 -> score = random.nextInt(70, 80);
+            case 5, 6, 7, 8 -> score = random.nextInt(80, 90);
+            case 9, 10 -> score = random.nextInt(90, 101);
+            default -> score = random.nextInt(0,60);
+            }
+
+        int idx = scores.indexOf(null);
+        if (idx >= 0) {
+            scores.set(idx, score);
+        } else {
+            scores.add(score);
         }
     }
 
