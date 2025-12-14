@@ -24,7 +24,26 @@ public class Assignment {
     }
 
     /**
-     * generates random scores for all students in an assignment from 0, 100
+     * calculates average of assignments and ignore null scores
+     * @return the average of assignments
+     */
+    public double calcAssignmentAverage() {
+        double sum = 0;
+        int count = 0;
+
+        for (Integer score : scores) {
+            if (score != null) {
+                sum += score;
+                count++;
+            }
+        }
+
+        return count == 0 ? 0 : Math.round(sum / count);
+    }
+
+
+    /**
+     * generates random scores for students in an assignment from 0, 100
      */
     public void generateRandomScore() {
         Random random = new Random();
