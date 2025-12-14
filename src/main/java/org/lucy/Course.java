@@ -181,4 +181,41 @@ public class Course {
 
         return count == 0 ? 0 : (int) Math.round(sum / count);
     }
+
+    /**
+     * simplified string to prevent infinity loop
+     * @return string with course id, coursename, credits and department
+     */
+    public String toSimplifiedString() {
+        return "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        String students = "{";
+
+        for (Student student : registeredStudents) {
+            students += student.toSimplifiedString() + "\n";
+        }
+        students += "}";
+
+        String assignmentWeight = isAssignmentWeightValid() ? "Yes" : "No";
+
+        String str = "Course{" +
+                "courseId='" + courseId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", credits=" + credits +
+                ", department=" + department +
+                ", assignments=" + assignments +
+                ", isAssignmentWeightValid=" + assignmentWeight +
+                ", registeredStudents=" + students +
+                '}';
+
+        return str;
+    }
 }
