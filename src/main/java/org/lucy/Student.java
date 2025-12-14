@@ -78,4 +78,37 @@ public class Student {
     public enum Gender {
         FEMALE, MALE
     }
+
+    /**
+     * simplified to string to prevent infinity loop
+     * @return simplified string
+     */
+    public String toSimplifiedString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", department=" + department +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        String courses = "{";
+
+        for (Course course : registeredCourses) {
+            courses += course.toSimplifiedString() + "\n";
+        }
+        courses += "}";
+
+        String str = "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", gender=" + gender +
+                ", address=" + address +
+                ", department=" + department +
+                ", registeredCourses=" + courses +
+                '}';
+
+        return str;
+    }
 }
