@@ -87,4 +87,42 @@ public class Course {
         finalScores.add(null);
         return true;
     }
+
+    /**
+     * adds an assignment to course
+     * @param assignmentName input assignment name
+     * @param assigmentWeight input assignment weight
+     * @return always true
+     */
+    public boolean addAssignment(String assignmentName, double assigmentWeight) {
+        Assignment assignment = new Assignment(assignmentName, assigmentWeight);
+        this.assignments.add(assignment);
+
+        return true;
+    }
+
+    /**
+     * generates random scores for each assignment and student, calculates the final score for each student
+     */
+    public void generateScores() {
+        for (Assignment assignment : assignments) {
+            for (int i = 0; i < registeredStudents.size(); i++) {
+                assignment.generateRandomScore();
+            }
+        }
+
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            double weightSum = 0;
+
+            for (Assignment a : assignments) {
+                Integer score = a.getScores().get(i);
+                if (score != null) {
+                    weightSum += score * a.getWeight();
+                }
+            }
+
+            int finalScore = (int) Math.round(weightSum / 100);
+            finalScores.set(i, finalScore);
+        }
+    }
 }
