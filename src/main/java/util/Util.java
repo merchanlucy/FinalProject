@@ -22,6 +22,6 @@ public class Util {
         }
 
         str = temp;
-        return str;
+        return str.trim();
     }
 }
