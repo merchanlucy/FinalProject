@@ -41,6 +41,24 @@ public class Student {
         }
 
         registeredCourses.add(course);
+        course.registerStudent(this);
+        course.getAssignments().add(null);
+
+        return true;
+    }
+
+    /**
+     * remove a course from the student's list of registered courses
+     * @param course course to be removed
+     * @return true if course was removed,
+     */
+    public boolean dropCourse(Course course) {
+        if (course == null || !registeredCourses.contains(course)) {
+            return false;
+        }
+
+        registeredCourses.remove(course);
+        course.getRegisteredStudents().remove(this);
 
         return true;
     }
